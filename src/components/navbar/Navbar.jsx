@@ -1,0 +1,43 @@
+import React, { useContext } from 'react'
+import "./navbar.scss"
+import SearchIcon from '@mui/icons-material/Search';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import MenuIcon from '@mui/icons-material/Menu';
+import { DarkModeContext } from "../context/darkModeContext";
+
+const Navbar = () => {
+  const {dispatch} = useContext(DarkModeContext)
+
+  return (
+    <div className='navbar'>
+      <div className="wrapper">
+        <div className="search">
+          <input type="text"  placeholder='Search here...' />
+          <SearchIcon/>
+        </div>
+
+        <div className="items">
+          <div className="item">
+            <NotificationsIcon/>
+            <div className="counter">1</div>
+          </div>
+
+          <div className="item" onClick={()=>dispatch({type : "TOGGLE"})}>
+            <DarkModeIcon/>
+          </div>
+          <div className="item">
+            <MenuIcon/>
+          </div>
+
+          <div className="item">
+           <img src="https://images.unsplash.com/photo-1675667804657-be9a9d0a6860?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className='avatar'/>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Navbar

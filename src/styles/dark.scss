@@ -1,0 +1,60 @@
+.app.dark{
+    background-color: #111;
+    color: rgb(203, 203, 203);
+
+ .table{
+    background-color: #111;
+
+    .tableCell{
+        color: rgb(145, 145, 145);
+    }
+ }
+
+ .navbar{
+    border-color: #333;
+ }
+
+ .sidebar{
+    ul{
+        li{
+
+            span{
+                color: rgb(160, 160, 160);
+            }
+            &:hover{
+                background-color: #333;
+            }
+
+        }
+    }
+
+  
+
+ }
+
+ .dataTable{
+    .datagrid{
+        color: gray;
+        border: none;
+
+        .viewButton,.deleteButton{
+            color: gray;
+            border: 1px solid #333;
+        }
+
+        .cellWithStatus{
+            background-color: #404040;
+            color: gray;
+          
+            
+        }
+
+        .css-rtrcn9-MuiTablePagination-root{
+            color: gray;
+            svg{
+                color: white;
+            }
+        }
+    }
+ }
+}

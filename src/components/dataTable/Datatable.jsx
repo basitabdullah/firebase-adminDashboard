@@ -1,39 +1,54 @@
 import React, { useEffect, useState } from "react";
 import "./dataTable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns,  } from "../../../datataleSource";
+import { userColumns, } from "../../../datataleSource";
 import { Link } from "react-router-dom";
-import { collection, getDocs,deleteDoc,doc } from "firebase/firestore";
-import {db} from "../../firebase"
+import { collection, getDocs, deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import { db } from "../../firebase"
 
 const Datatable = () => {
   const [data, setData] = useState([]);
 
-  useEffect(()=>{
-  const fetchData = async()=>{
-    let list = []
-    try{
+  useEffect(() => {
+    // const fetchData = async()=>{
+    //   let list = []
+    //   try{
 
-      const querySnapshot = await getDocs(collection(db, "users"));
-      querySnapshot.forEach((doc) => {
-        list.push({id : doc.id , ...doc.data()})
-      });
+    //     const querySnapshot = await getDocs(collection(db, "users"));
+    //     querySnapshot.forEach((doc) => {
+    //       list.push({id : doc.id , ...doc.data()})
+    //     });
+    //     setData(list)
+    //     console.log(list);
+    //   } catch(err){
+    //     console.log(err);
+    //   }
+
+    // }
+    // fetchData()
+
+    //listen(real-time-database)
+
+    const unsub = onSnapshot(collection(db, "users"), (snapShot) => {
+      let list = []
+      snapShot.docs.forEach(doc => {
+        list.push({ id: doc.id, ...doc.data() })
+      })
       setData(list)
-      console.log(list);
-    } catch(err){
-      console.log(err);
+    }, (error) => {
+      console.log(error);
+    });
+    return () => {
+      unsub()
     }
+  }, [])
 
-  }
-  fetchData()
-  },[])
-
-  const handleDelete = async(id) => {
-    try{
+  const handleDelete = async (id) => {
+    try {
       await deleteDoc(doc(db, "users", id));
       setData(data.filter((item) => item.id !== id));
-    }catch(err){
-     console.log(err);
+    } catch (err) {
+      console.log(err);
     }
   };
   const actionColumn = [
@@ -59,7 +74,7 @@ const Datatable = () => {
     },
   ];
   return (
-    <div style={{ height: 550, width: "90%" }} className="dataTable">
+    <div style={{ width: "90%" }} className="dataTable">
       <div className="datatableTitle">
         Add New User
         <Link to="/users/new" className="link">

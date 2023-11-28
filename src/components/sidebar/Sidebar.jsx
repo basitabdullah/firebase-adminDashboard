@@ -9,7 +9,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
-import { DarkModeContext } from "../context/darkModeContext";
+import { DarkModeContext } from "../../context/darkModeContext";
 
 const Sidebar = () => {
 

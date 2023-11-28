@@ -1,60 +1,67 @@
-.app.dark{
-    background-color: #111;
-    color: rgb(203, 203, 203);
+.app.dark {
+  background-color: #111;
+  color: rgb(203, 203, 203);
 
- .table{
+  .table {
     background-color: #111;
 
-    .tableCell{
-        color: rgb(145, 145, 145);
+    .tableCell {
+      color: rgb(145, 145, 145);
     }
- }
+  }
 
- .navbar{
+  .navbar {
     border-color: #333;
- }
+  }
 
- .sidebar{
-    ul{
-        li{
-
-            span{
-                color: rgb(160, 160, 160);
-            }
-            &:hover{
-                background-color: #333;
-            }
-
+  .sidebar {
+    ul {
+      li {
+        span {
+          color: rgb(160, 160, 160);
         }
+        &:hover {
+          background-color: #333;
+        }
+      }
     }
+  }
 
-  
+  .dataTable {
+    .datagrid {
+      color: gray;
+      border: none;
 
- }
-
- .dataTable{
-    .datagrid{
+      .viewButton,
+      .deleteButton {
         color: gray;
-        border: none;
+        border: 1px solid #333;
+      }
 
-        .viewButton,.deleteButton{
-            color: gray;
-            border: 1px solid #333;
-        }
+      .cellWithStatus {
+        background-color: #404040;
+        color: gray;
+      }
 
-        .cellWithStatus{
-            background-color: #404040;
-            color: gray;
-          
-            
+      .css-rtrcn9-MuiTablePagination-root {
+        color: gray;
+        svg {
+          color: white;
         }
-
-        .css-rtrcn9-MuiTablePagination-root{
-            color: gray;
-            svg{
-                color: white;
-            }
-        }
+      }
     }
- }
+  }
+
+  .single .singleContainer .title {
+    color: rgb(190 190 190);
+  }
+  .single .singleContainer .top .left .item .details .itemTitle {
+    color: rgb(190 190 190);
+  }
+  .single .singleContainer .top .left .item .details .detailItem .itemKey {
+    color: rgb(120 120 120);
+  }
+  .single .singleContainer .top .left .editButton {
+    color: #ad8ead;
+  }
 }

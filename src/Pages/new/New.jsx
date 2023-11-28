@@ -17,41 +17,40 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const [data, setData] = useState({});
-  
+  const [perc, setPerc] = useState(null);
 
   useEffect(() => {
     const uploadFile = () => {
       const name = new Date().getTime() + file.name;
       const storageRef = ref(storage, file.name);
 
-      const uploadTask = uploadBytesResumable(storageRef, file);  
+      const uploadTask = uploadBytesResumable(storageRef, file);
 
-uploadTask.on('state_changed', 
-  (snapshot) => {
-
-    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    console.log('Upload is ' + progress + '% done');
-    switch (snapshot.state) {
-      case 'paused':
-        console.log('Upload is paused');
-        break;
-      case 'running':
-        console.log('Upload is running');
-        break;
-    }
-  }, 
-  (error) => {
-  console.log(error);
-  }, 
-  () => {
-
-    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-     setData((prev)=>({...prev , img : downloadURL}))
-    });
-  }
-);
-
-
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          setPerc(progress);
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+          }
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setData((prev) => ({ ...prev, img: downloadURL }));
+          });
+        }
+      );
     };
     file && uploadFile();
   }, [file]);
@@ -77,8 +76,6 @@ uploadTask.on('state_changed',
     } catch (err) {
       console.log(err);
     }
-
-    
   };
 
   return (
@@ -126,7 +123,9 @@ uploadTask.on('state_changed',
                 </div>
               ))}
 
-              <button type="submit">Send</button>
+              <button disabled={perc !== null && perc < 100} type="submit">
+                Send
+              </button>
             </form>
           </div>
         </div>
